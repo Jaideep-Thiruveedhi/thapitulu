@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thapitalu Zen Sound Pad</title>
+
+    <!-- Luxury Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- New brush font for title -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="dark">
+    <!-- Atmosphere -->
+    <canvas id="petals"></canvas>
+    <canvas id="smoke"></canvas>
+
+    <div class="app">
+      <header class="header">
+        <div>
+          <h1 class="title">THAPITALU</h1>
+          <p class="subtitle">ZEN SOUND PAD</p>
+        </div>
+
+        <button id="themeToggle" class="toggle">
+          Theme
+          <span class="btn-icon">🌗</span>
+        </button>
+      </header>
+
+      <main class="main">
+        <!-- LEFT ORBITING PADS -->
+        <section class="pads">
+          <div class="orbit">
+            <!-- Bamboo Tap (Q) -->
+            <button class="pad" data-sound="tap" data-key="Q">
+              <svg viewBox="0 0 64 64" class="icon">
+                <path
+                  d="M18 22 L46 42"
+                  stroke="#E6C76E"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M22 18 L50 38"
+                  stroke="#E6C76E"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                />
+                <circle cx="19" cy="21" r="4" fill="#E6C76E" />
+              </svg>
+            </button>
+
+            <!-- Water Drop (W) -->
+            <button class="pad" data-sound="drop" data-key="W">
+              <svg viewBox="0 0 64 64" class="icon">
+                <path
+                  d="M32 10 C22 26 18 34 18 42 C18 52 26 58 32 58 C38 58 46 52 46 42 C46 34 42 26 32 10Z"
+                  stroke="#E6C76E"
+                  stroke-width="2.8"
+                  fill="none"
+                />
+              </svg>
+            </button>
+
+            <!-- Bell (E) -->
+            <button class="pad" data-sound="bell" data-key="E">
+              <svg viewBox="0 0 64 64" class="icon">
+                <path
+                  d="M32 10 C22 16 20 24 20 32 L20 44 L12 48 L52 48 L44 44 L44 32 C44 24 42 16 32 10Z"
+                  stroke="#E6C76E"
+                  stroke-width="2.8"
+                  fill="none"
+                />
+                <circle cx="32" cy="52" r="4" fill="#E6C76E" />
+              </svg>
+            </button>
+
+            <!-- Wind (R) -->
+            <button class="pad" data-sound="breath" data-key="R">
+              <svg viewBox="0 0 64 64" class="icon">
+                <path
+                  d="M12 24 C28 24 40 20 48 16"
+                  stroke="#E6C76E"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M12 34 C28 34 46 30 52 26"
+                  stroke="#E6C76E"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M26 44 C34 44 42 40 50 36"
+                  stroke="#E6C76E"
+                  stroke-width="2.8"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+          </div>
+          <p class="hint">Tap pads or press Q W E R</p>
+        </section>
+
+        <!-- RIGHT VISUALIZER & CONTROLS -->
+        <section class="visual-controls">
+          <div class="breath">
+            <div class="inner"></div>
+          </div>
+
+          <div class="controls">
+            <label for="volume">Volume</label>
+            <input
+              id="volume"
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value="1"
+            />
+
+            <div class="btns">
+              <!-- 🔉 Mute Button -->
+              <button id="mute" class="btn">
+                <span class="btn-label">Mute</span>
+                <span class="btn-icon">🔊</span>
+              </button>
+
+              <button id="record" class="btn gold">
+                <span class="btn-label">Record</span>
+                <span class="btn-icon">⏺️</span>
+              </button>
+
+              <!-- Play / Stop toggle -->
+              <button id="playRecord" class="btn gold">
+                <span class="btn-label">Play</span>
+                <span class="btn-icon">▶️</span>
+              </button>
+
+              <button id="saveRec" class="btn">
+                <span class="btn-label">Save Rec</span>
+                <span class="btn-icon">💾</span>
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

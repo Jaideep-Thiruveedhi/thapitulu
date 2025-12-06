@@ -1,0 +1,574 @@
+/* ========== RESET ========== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  overflow: hidden;
+}
+
+/* ========== THEMES ========== */
+
+body.light {
+  background:
+    radial-gradient(circle at top, #fefcf7 0%, #f4ebde 38%, #ebdfcf 100%),
+    url("assets/textures/rice-paper.png");
+  background-size: cover;
+  background-blend-mode: soft-light;
+  color: #26201a;
+}
+
+body.dark {
+  background:
+    radial-gradient(circle at top, #131313 0%, #070707 40%, #020202 100%),
+    url("assets/textures/rice-paper.png");
+  background-size: cover;
+  background-blend-mode: multiply;
+  color: #f4efe5;
+}
+
+/* ========== APP CARD ========== */
+
+.app {
+  position: relative;
+  z-index: 2;
+  width: 95%;
+  max-width: 1024px;
+  margin: 24px auto;
+  padding: 24px 24px 26px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.22);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: introFade 1.2s ease-out forwards;
+}
+
+@keyframes introFade {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  60% {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body.dark .app {
+  background: rgba(12, 11, 10, 0.9);
+  box-shadow: 0 30px 95px rgba(0, 0, 0, 0.9);
+}
+
+/* ========== HEADER ========== */
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+/* Simple title font */
+.title {
+  font-family: "Poppins", sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.18em;
+  color: #212121;
+}
+
+body.dark .title {
+  color: #f7f0dd;
+}
+
+.subtitle {
+  font-size: 13px;
+  margin-top: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  opacity: 0.8;
+}
+
+body.light .subtitle {
+  color: #6b6358;
+}
+
+body.dark .subtitle {
+  color: #d6cbbd;
+}
+
+.toggle {
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  background: rgba(255, 255, 255, 0.6);
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.15s ease;
+}
+
+body.dark .toggle {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.65);
+  color: #f4efe5;
+}
+
+.toggle:hover {
+  transform: scale(1.06);
+  filter: brightness(1.04);
+}
+
+.toggle:active {
+  transform: scale(0.93);
+}
+
+/* ========== LAYOUT ========== */
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.pads,
+.visual-controls {
+  flex: 1;
+  text-align: center;
+}
+
+/* ========== ORBITING PADS ========== */
+
+.orbit {
+  position: relative;
+  width: 320px; /* increased to reduce overlap */
+  height: 320px;
+  margin: 22px auto 10px;
+  animation: orbit 26s linear infinite;
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Pad base */
+.pad {
+  position: absolute;
+  width: 94px;
+  height: 94px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background:
+    radial-gradient(circle at 20% 20%, #f9ede0 0%, #d1b08a 52%, #7b5a33 100%),
+    url("assets/textures/bamboo.png");
+  background-size: cover;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.26);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  opacity: 0;
+  animation: padReveal 0.8s ease-out forwards;
+}
+
+body.dark .pad {
+  background:
+    radial-gradient(circle at 20% 20%, #50402f 0%, #372a1d 52%, #17110a 100%),
+    url("assets/textures/bamboo.png");
+  background-size: cover;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.85);
+}
+
+.pad:nth-child(1) {
+  animation-delay: 0.4s;
+}
+
+.pad:nth-child(2) {
+  animation-delay: 0.55s;
+}
+
+.pad:nth-child(3) {
+  animation-delay: 0.7s;
+}
+
+.pad:nth-child(4) {
+  animation-delay: 0.85s;
+}
+
+@keyframes padReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Gold ring (base) */
+.pad::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 2px solid #e6c76e;
+  box-shadow:
+    0 0 4px rgba(230, 199, 110, 0.9),
+    0 0 14px rgba(0, 0, 0, 0.6) inset;
+  pointer-events: none;
+}
+
+/* Light mode: ring becomes pink */
+body.light .pad::before {
+  border-color: #ff7eb8;
+  box-shadow:
+    0 0 6px rgba(255, 126, 184, 0.9),
+    0 0 14px rgba(255, 126, 184, 0.4) inset;
+}
+
+/* Jewel highlight */
+.pad::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 9px;
+  width: 54%;
+  height: 32%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.45),
+    rgba(255, 250, 230, 0.08),
+    rgba(255, 255, 255, 0)
+  );
+  border-radius: 50%;
+  transform: rotate(-18deg);
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Icons (Gold, Bold, Breathing) */
+.icon {
+  width: 56%;
+  height: 56%;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  fill: none;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+  animation: jewelBreath 3.4s ease-in-out infinite;
+}
+
+/* Light mode: icon stroke & fill pink */
+body.light .icon {
+  stroke: #ff7eb8;
+  fill: none;
+}
+
+body.light .icon circle {
+  fill: #ff7eb8;
+}
+
+@keyframes jewelBreath {
+  0%,
+  100% {
+    transform: scale(0.96);
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
+  }
+
+  50% {
+    transform: scale(1.04);
+    filter: drop-shadow(0 0 6px rgba(230, 199, 110, 0.7));
+  }
+}
+
+/* Extra slow rotation to keep motion */
+@keyframes iconOrbit {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.pad .icon {
+  animation:
+    jewelBreath 3.4s ease-in-out infinite,
+    iconOrbit 22s linear infinite;
+}
+
+/* Pad Hit Animation */
+.pad.active {
+  transform: scale(1.12) translateY(-4px);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.45);
+}
+
+.pad.active .icon {
+  animation: jewelHit 0.28s ease-out;
+}
+
+@keyframes jewelHit {
+  0% {
+    transform: scale(1.12);
+    filter: drop-shadow(0 0 10px rgba(230, 199, 110, 1));
+  }
+
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 4px rgba(230, 199, 110, 0.7));
+  }
+}
+
+/* Pad positions */
+.pad:nth-child(1) {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.pad:nth-child(2) {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.pad:nth-child(3) {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.pad:nth-child(4) {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Tooltip */
+.hint {
+  margin-top: 10px;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+/* ========== VISUALIZER ========== */
+
+.breath {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  margin: 30px auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.26);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.16);
+}
+
+/* Light mode pink circle */
+body.light .breath {
+  border-color: #ff7eb8;
+  box-shadow: 0 0 12px rgba(255, 126, 184, 0.4);
+}
+
+body.dark .breath {
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 22px rgba(0, 0, 0, 0.9);
+}
+
+.inner {
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 0, 0, 0.35);
+  animation: ringBreath 3.4s ease-in-out infinite;
+}
+
+/* Light mode pink inner ring */
+body.light .inner {
+  border-color: #ff9fca;
+}
+
+body.dark .inner {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+@keyframes ringBreath {
+  0%,
+  100% {
+    transform: scale(0.9);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+/* ========== CONTROLS ========== */
+
+.controls {
+  margin-top: 18px;
+}
+
+.controls label {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+#volume {
+  width: 80%;
+  margin: 12px 0 18px;
+  cursor: pointer;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  padding: 7px 18px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  transition: 0.16s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+body.dark .btn {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(10, 10, 10, 0.85);
+  color: #f4efe5;
+}
+
+/* Gold style base (for dark mode) */
+.btn.gold {
+  background: linear-gradient(135deg, #f2d48c, #d3aa52);
+  border-color: #f3d78f;
+  color: #211a12;
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.35),
+    0 0 10px rgba(242, 210, 120, 0.6);
+}
+
+/* Light mode: Record & Play pink */
+body.light .btn.gold {
+  background: linear-gradient(135deg, #ff7eb8, #ff9fca);
+  border-color: #ff9fca;
+  color: #3b1826;
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.25),
+    0 0 10px rgba(255, 159, 202, 0.7);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.25);
+}
+
+.btn.gold:hover {
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.4),
+    0 0 14px rgba(242, 210, 120, 0.9);
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.97);
+}
+
+/* ========== MICRO SPARK ========== */
+
+.spark {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #fbe699 0%, #e8c56d 50%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkFx 0.45s ease-out forwards;
+  z-index: 9999;
+}
+
+@keyframes sparkFx {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(1px);
+  }
+
+  100% {
+    transform: scale(3.8);
+    opacity: 0;
+    filter: blur(3px);
+  }
+}
+
+/* ========== PETALS & SMOKE CANVAS ========== */
+
+#petals,
+#smoke {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure app stays above canvas */
+.app {
+  z-index: 2;
+}
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .orbit {
+    width: 260px;
+    height: 260px;
+  }
+
+  .pad {
+    width: 82px;
+    height: 82px;
+  }
+}
